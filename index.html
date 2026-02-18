@@ -109,14 +109,22 @@
 
   /* ABOUT */
   #about { background:var(--bg2); }
-  .about-logos { display:flex; gap:1rem; justify-content:flex-end; margin-bottom:2rem; flex-wrap:wrap; max-width:1000px; margin-left:auto; margin-right:auto; }
+  .about-logos { display:flex; gap:1.5rem; justify-content:flex-end; margin-bottom:2rem; flex-wrap:wrap; max-width:1000px; margin-left:auto; margin-right:auto; }
   .school-logo-card {
-    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:14px;
-    padding:1rem 1.8rem; display:flex; align-items:center; gap:.8rem; transition:.3s;
-    backdrop-filter:blur(8px);
+    background:rgba(255,255,255,0.06); border:2px solid rgba(255,255,255,0.15); border-radius:16px;
+    padding:1.2rem 2rem; display:flex; align-items:center; justify-content:center;
+    transition:all .35s ease; backdrop-filter:blur(8px);
+    box-shadow:0 4px 15px rgba(0,0,0,.3);
+    cursor:pointer;
   }
-  .school-logo-card:hover { border-color:var(--cyan); background:rgba(255,255,255,0.12); }
-  .school-logo-card img { height:55px; object-fit:contain; border-radius:6px; }
+  .school-logo-card:hover {
+    border-color:var(--cyan);
+    background:rgba(0,212,255,0.08);
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:0 8px 30px rgba(0,212,255,.2);
+  }
+  .school-logo-card img { height:70px; width:160px; object-fit:contain; border-radius:6px; transition:all .35s ease; }
+  .school-logo-card:hover img { filter:drop-shadow(0 0 8px rgba(0,212,255,.5)); }
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
   .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
   .about-text p strong { color:var(--cyan); }
