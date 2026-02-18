@@ -1,0 +1,2586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoukang Yu | Robotics Engineer</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e35;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --pink: #ff006e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --grad: linear-gradient(135deg, #00d4ff, #7c3aed);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; overflow-x:hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:60px;
+  }
+  .logo { font-size:1.2rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s; }
+  .nav-links a:hover { color:var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:80px 10% 0;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.1) 0%, transparent 50%);
+  }
+  /* grid lines */
+  .hero-bg::after {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .hero-content { position:relative; z-index:1; max-width:650px; }
+  .hero-tag {
+    display:inline-block; padding:.3rem .8rem; border-radius:20px;
+    border:1px solid var(--cyan); color:var(--cyan); font-size:.8rem;
+    margin-bottom:1.5rem; letter-spacing:.05em;
+  }
+  .hero-content h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
+  .hero-content h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+  .hero-sub strong { color:var(--cyan); }
+  .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding:.75rem 1.8rem; border-radius:8px; font-size:.95rem; cursor:pointer;
+    text-decoration:none; transition:.3s; font-weight:600;
+  }
+  .btn-primary {
+    background:var(--grad); color:#fff;
+    box-shadow:0 0 20px rgba(0,212,255,.3);
+  }
+  .btn-primary:hover { box-shadow:0 0 35px rgba(0,212,255,.5); transform:translateY(-2px); }
+  .btn-outline {
+    border:1px solid var(--border); color:var(--text); background:transparent;
+  }
+  .btn-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  /* floating robot icon */
+  .hero-visual {
+    position:absolute; right:8%; top:50%; transform:translateY(-50%);
+    width:320px; height:320px; display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .robo-ring {
+    position:absolute; border-radius:50%;
+    border:1px solid;
+    animation:spin linear infinite;
+  }
+  .robo-ring:nth-child(1) { width:300px;height:300px; border-color:rgba(0,212,255,.2); animation-duration:20s; }
+  .robo-ring:nth-child(2) { width:220px;height:220px; border-color:rgba(124,58,237,.3); animation-duration:14s; animation-direction:reverse; }
+  .robo-ring:nth-child(3) { width:140px;height:140px; border-color:rgba(0,212,255,.4); animation-duration:8s; }
+  .robo-icon { font-size:4rem; z-index:1; filter:drop-shadow(0 0 20px #00d4ff); }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  /* SECTIONS */
+  section { padding:90px 10%; }
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-tag { color:var(--cyan); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; }
+  .section-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .divider { width:60px; height:3px; background:var(--grad); margin:.8rem auto 0; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--bg2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
+  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
+  .about-text p strong { color:var(--cyan); }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:1rem; text-align:center;
+  }
+  .stat-num { font-size:1.6rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .info-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+  .info-list li { display:flex; align-items:center; gap:.8rem; font-size:.9rem; color:var(--muted); }
+  .info-list li span:first-child { color:var(--cyan); font-size:1rem; }
+  .info-list li strong { color:var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1.5rem; transition:.3s;
+  }
+  .skill-card:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,212,255,.1); }
+  .skill-card h3 { font-size:.95rem; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; }
+  .skill-card h3 .icon { font-size:1.3rem; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .tag {
+    padding:.3rem .7rem; border-radius:20px; font-size:.75rem;
+    border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+    transition:.3s;
+  }
+  .skill-card:hover .tag { border-color:rgba(0,212,255,.3); color:var(--text); }
+
+  /* PROJECTS */
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .proj-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .proj-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .proj-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.3); box-shadow:0 15px 40px rgba(0,0,0,.4); }
+  .proj-num { font-size:.75rem; color:var(--cyan); letter-spacing:.1em; margin-bottom:.5rem; }
+  .proj-card h3 { font-size:1.05rem; margin-bottom:.5rem; }
+  .proj-card p { color:var(--muted); font-size:.85rem; line-height:1.7; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
+  .proj-tag { padding:.2rem .6rem; background:rgba(124,58,237,.15); color:#a78bfa; border-radius:4px; font-size:.72rem; border:1px solid rgba(124,58,237,.3); }
+  .proj-links { display:flex; gap:.8rem; }
+  .proj-link { font-size:.8rem; color:var(--cyan); text-decoration:none; display:flex; align-items:center; gap:.3rem; transition:.3s; }
+  .proj-link:hover { color:#fff; }
+
+  /* EXPERIENCE */
+  .timeline { max-width:750px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(var(--cyan),var(--purple)); }
+  .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; }
+  .tl-dot {
+    width:42px; height:42px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; position:relative; z-index:1;
+    box-shadow:0 0 15px rgba(0,212,255,.4);
+  }
+  .tl-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; flex:1; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; margin-bottom:.3rem; }
+  .tl-header h3 { font-size:.95rem; }
+  .tl-date { font-size:.75rem; color:var(--cyan); background:rgba(0,212,255,.1); padding:.2rem .6rem; border-radius:4px; }
+  .tl-company { font-size:.8rem; color:var(--purple); margin-bottom:.7rem; }
+  .tl-content ul { padding-left:1rem; color:var(--muted); font-size:.82rem; line-height:1.8; }
+  .tl-content ul li { margin-bottom:.3rem; }
+
+  /* EDUCATION */
+  #education { background:var(--bg2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .edu-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .edu-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-4px); }
+  .edu-icon { font-size:2rem; margin-bottom:1rem; }
+  .edu-card h3 { font-size:1rem; margin-bottom:.3rem; }
+  .edu-school { color:var(--cyan); font-size:.85rem; margin-bottom:.3rem; }
+  .edu-date { color:var(--muted); font-size:.8rem; margin-bottom:.8rem; }
+  .edu-gpa { display:inline-block; background:rgba(0,212,255,.1); color:var(--cyan); padding:.2rem .6rem; border-radius:4px; font-size:.8rem; margin-bottom:.8rem; }
+  .edu-courses { font-size:.78rem; color:var(--muted); line-height:1.7; }
+  .edu-courses strong { color:var(--text); display:block; margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-wrapper { max-width:600px; margin:0 auto; text-align:center; }
+  .contact-wrapper p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .contact-item {
+    display:flex; align-items:center; gap:.6rem;
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:.9rem 1.4rem; text-decoration:none; color:var(--text);
+    font-size:.9rem; transition:.3s;
+  }
+  .contact-item:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,.15); }
+  .contact-item span:first-child { font-size:1.2rem; }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem; color:var(--muted); font-size:.8rem; }
+  footer span { color:var(--cyan); }
+
+  @media(max-width:768px) {
+    .hero-visual { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2rem; }
+    nav { padding:0 4%; }
+    .nav-links { gap:1.2rem; }
+    .nav-links li:nth-child(n+4) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">&lt;SY /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🤖 Robotics Engineer</div>
+    <h1>Hi, I'm <span>Shoukang Yu</span></h1>
+    <p class="hero-sub">
+      Master's student at <strong>Northeastern University</strong> specializing in
+      <strong>autonomous robotics</strong>, ROS2, SLAM, and computer vision.
+      Building intelligent systems that bridge hardware and software.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-icon">🤖</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// who am i</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a robotics engineer passionate about building <strong>autonomous systems</strong> that interact intelligently with the real world. Currently pursuing my Master's in Electrical & Computer Engineering at Northeastern University with a perfect 4.0 GPA.</p>
+      <p>My work spans <strong>ROS2 development</strong>, SLAM-based navigation, computer vision for defect detection, and industrial robot programming. I enjoy bridging theory and hands-on implementation.</p>
+      <p>Previously interned at <strong>Dongfeng Motor Corporation</strong> where I programmed ABB six-axis robots, and at <strong>Vtech Holdings</strong> in mold engineering and process optimization.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">4.0</div><div class="stat-label">GPA</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Industry Internships</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
+      </div>
+    </div>
+    <ul class="info-list">
+      <li><span>📍</span><div><div style="font-size:.75rem;color:var(--muted)">Location</div><strong>Boston, MA</strong></div></li>
+      <li><span>🎓</span><div><div style="font-size:.75rem;color:var(--muted)">University</div><strong>Northeastern University</strong></div></li>
+      <li><span>📚</span><div><div style="font-size:.75rem;color:var(--muted)">Degree</div><strong>M.S. Electrical & Computer Engineering</strong></div></li>
+      <li><span>⚙️</span><div><div style="font-size:.75rem;color:var(--muted)">Focus</div><strong>Autonomous Robotics & ROS2</strong></div></li>
+      <li><span>📧</span><div><div style="font-size:.75rem;color:var(--muted)">Email</div><strong>yu.sho@northeastern.edu</strong></div></li>
+      <li><span>🔗</span><div><div style="font-size:.75rem;color:var(--muted)">GitHub</div><strong>github.com/ShoukangYu</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="icon">🤖</span> Robotics & Autonomy</h3>
+      <div class="tag-list">
+        <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">ROS</span>
+        <span class="tag">Kalman Filters</span><span class="tag">Kinematics</span>
+        <span class="tag">Dynamics</span><span class="tag">Sensor Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">👁️</span> Vision & AI</h3>
+      <div class="tag-list">
+        <span class="tag">OpenCV</span><span class="tag">HALCON</span>
+        <span class="tag">Reinforcement Learning</span><span class="tag">Machine Learning</span>
+        <span class="tag">Image Processing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">💻</span> Programming</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span><span class="tag">C/C++</span>
+        <span class="tag">MATLAB</span><span class="tag">Arduino</span>
+        <span class="tag">LabVIEW</span><span class="tag">RAPID</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🔧</span> Hardware & CAD</h3>
+      <div class="tag-list">
+        <span class="tag">SolidWorks</span><span class="tag">CREO</span>
+        <span class="tag">AutoCAD</span><span class="tag">ANSYS</span>
+        <span class="tag">3D Printing</span><span class="tag">CNC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🗄️</span> Databases & Dev</h3>
+      <div class="tag-list">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Git</span>
+        <span class="tag">Linux</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🏭</span> Manufacturing</h3>
+      <div class="tag-list">
+        <span class="tag">Product Development</span><span class="tag">Process Optimization</span>
+        <span class="tag">Quality Control</span><span class="tag">OpenLCA</span>
+        <span class="tag">Injection Molding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// what i've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01 / ROBOTICS</div>
+      <h3>ROS2 Autonomous Explorer</h3>
+      <p>Implemented autonomous exploration and mapping for mobile robots using ROS2. Features Wanderer (random obstacle avoidance) and Discoverer (frontier-based exploration) algorithms with SLAM-based navigation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">ROS2</span><span class="proj-tag">SLAM</span>
+        <span class="proj-tag">Python</span><span class="proj-tag">LaserScan</span>
+        <span class="proj-tag">Autonomous Nav</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+        <a href="#" class="proj-link">⟶ Demo</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02 / COMPUTER VISION</div>
+      <h3>Automated Chip Fault Detection</h3>
+      <p>Automated visual inspection system for chip defect detection. Designed a chip positioning system with visual calibration and X/Y axis motion control, plus an image processing pipeline using HALCON for defect detection.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">C++</span><span class="proj-tag">HALCON</span>
+        <span class="proj-tag">Computer Vision</span><span class="proj-tag">Motion Control</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03 / HRI</div>
+      <h3>Voice-Controlled Robot Interface</h3>
+      <p>Real-time voice recognition system for human-robot interaction. Built audio signal acquisition and processing using MyDAQ and LabVIEW with iFlytek Speech SDK for speaker identification and command execution.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">LabVIEW</span><span class="proj-tag">MyDAQ</span>
+        <span class="proj-tag">Speech SDK</span><span class="proj-tag">HRI</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04 / INDUSTRIAL ROBOTICS</div>
+      <h3>ABB Robot Automation System</h3>
+      <p>Programmed a six-axis ABB robot for block grasping and stacking operations at Dongfeng Motor. Defined motion paths, I/O control, and gripper sequences in RAPID language for automated material handling.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RAPID</span><span class="proj-tag">ABB Robot</span>
+        <span class="proj-tag">Automation</span><span class="proj-tag">Industrial</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏭</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mechanical Engineering Intern</h3>
+          <span class="tl-date">Apr 2024 – Jul 2024</span>
+        </div>
+        <div class="tl-company">Dongfeng Motor Corporation · Shiyan, China</div>
+        <ul>
+          <li>Programmed six-axis ABB robot using RAPID language for block grasping and stacking operations</li>
+          <li>Defined motion paths, I/O control, and gripper sequences for automated material handling on production line</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">⚙️</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mold Design & Manufacturing Intern</h3>
+          <span class="tl-date">Jul 2024 – Sep 2024</span>
+        </div>
+        <div class="tl-company">Vtech Holdings Limited · Dongguan, China</div>
+        <ul>
+          <li>Evaluated mold structures and injection molding processes by analyzing 3D assemblies in CREO</li>
+          <li>Identified root causes of production anomalies, reducing defect occurrences</li>
+          <li>Designed 3D mold assemblies including gating, ejection, and cooling systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <div class="section-tag">// academic background</div>
+    <h2 class="section-title">Edu<span>cation</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <h3>M.S. Electrical & Computer Engineering</h3>
+      <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="edu-date">Sep 2025 – Apr 2027</div>
+      <div class="edu-gpa">GPA: 4.00 / 4.00</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Mobile Robotics · Reinforcement Learning · Database Management Systems · Applied Probability & Stochastic Processes
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <h3>B.E. Intelligent Manufacturing Engineering</h3>
+      <div class="edu-school">Shantou University · Shantou, China</div>
+      <div class="edu-date">Sep 2021 – Jun 2025</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Programming Design · Engineering Mechanics · Machine Learning · Intelligent System Design
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// let's connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <p>I'm currently open to robotics engineering roles, research collaborations, and interesting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:yu.sho@northeastern.edu" class="contact-item">
+        <span>📧</span> yu.sho@northeastern.edu
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span>🐙</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Shoukang Yu</span> · 2025</p>
+</footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoukang Yu | Robotics Engineer</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e35;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --pink: #ff006e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --grad: linear-gradient(135deg, #00d4ff, #7c3aed);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; overflow-x:hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:60px;
+  }
+  .logo { font-size:1.2rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s; }
+  .nav-links a:hover { color:var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:80px 10% 0;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.1) 0%, transparent 50%);
+  }
+  /* grid lines */
+  .hero-bg::after {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .hero-content { position:relative; z-index:1; max-width:650px; }
+  .hero-tag {
+    display:inline-block; padding:.3rem .8rem; border-radius:20px;
+    border:1px solid var(--cyan); color:var(--cyan); font-size:.8rem;
+    margin-bottom:1.5rem; letter-spacing:.05em;
+  }
+  .hero-content h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
+  .hero-content h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+  .hero-sub strong { color:var(--cyan); }
+  .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding:.75rem 1.8rem; border-radius:8px; font-size:.95rem; cursor:pointer;
+    text-decoration:none; transition:.3s; font-weight:600;
+  }
+  .btn-primary {
+    background:var(--grad); color:#fff;
+    box-shadow:0 0 20px rgba(0,212,255,.3);
+  }
+  .btn-primary:hover { box-shadow:0 0 35px rgba(0,212,255,.5); transform:translateY(-2px); }
+  .btn-outline {
+    border:1px solid var(--border); color:var(--text); background:transparent;
+  }
+  .btn-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  /* floating robot icon */
+  .hero-visual {
+    position:absolute; right:8%; top:50%; transform:translateY(-50%);
+    width:320px; height:320px; display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .robo-ring {
+    position:absolute; border-radius:50%;
+    border:1px solid;
+    animation:spin linear infinite;
+  }
+  .robo-ring:nth-child(1) { width:300px;height:300px; border-color:rgba(0,212,255,.2); animation-duration:20s; }
+  .robo-ring:nth-child(2) { width:220px;height:220px; border-color:rgba(124,58,237,.3); animation-duration:14s; animation-direction:reverse; }
+  .robo-ring:nth-child(3) { width:140px;height:140px; border-color:rgba(0,212,255,.4); animation-duration:8s; }
+  .robo-icon { font-size:4rem; z-index:1; filter:drop-shadow(0 0 20px #00d4ff); }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  /* SECTIONS */
+  section { padding:90px 10%; }
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-tag { color:var(--cyan); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; }
+  .section-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .divider { width:60px; height:3px; background:var(--grad); margin:.8rem auto 0; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--bg2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
+  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
+  .about-text p strong { color:var(--cyan); }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:1rem; text-align:center;
+  }
+  .stat-num { font-size:1.6rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .info-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+  .info-list li { display:flex; align-items:center; gap:.8rem; font-size:.9rem; color:var(--muted); }
+  .info-list li span:first-child { color:var(--cyan); font-size:1rem; }
+  .info-list li strong { color:var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1.5rem; transition:.3s;
+  }
+  .skill-card:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,212,255,.1); }
+  .skill-card h3 { font-size:.95rem; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; }
+  .skill-card h3 .icon { font-size:1.3rem; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .tag {
+    padding:.3rem .7rem; border-radius:20px; font-size:.75rem;
+    border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+    transition:.3s;
+  }
+  .skill-card:hover .tag { border-color:rgba(0,212,255,.3); color:var(--text); }
+
+  /* PROJECTS */
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .proj-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .proj-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .proj-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.3); box-shadow:0 15px 40px rgba(0,0,0,.4); }
+  .proj-num { font-size:.75rem; color:var(--cyan); letter-spacing:.1em; margin-bottom:.5rem; }
+  .proj-card h3 { font-size:1.05rem; margin-bottom:.5rem; }
+  .proj-card p { color:var(--muted); font-size:.85rem; line-height:1.7; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
+  .proj-tag { padding:.2rem .6rem; background:rgba(124,58,237,.15); color:#a78bfa; border-radius:4px; font-size:.72rem; border:1px solid rgba(124,58,237,.3); }
+  .proj-links { display:flex; gap:.8rem; }
+  .proj-link { font-size:.8rem; color:var(--cyan); text-decoration:none; display:flex; align-items:center; gap:.3rem; transition:.3s; }
+  .proj-link:hover { color:#fff; }
+
+  /* EXPERIENCE */
+  .timeline { max-width:750px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(var(--cyan),var(--purple)); }
+  .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; }
+  .tl-dot {
+    width:42px; height:42px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; position:relative; z-index:1;
+    box-shadow:0 0 15px rgba(0,212,255,.4);
+  }
+  .tl-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; flex:1; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; margin-bottom:.3rem; }
+  .tl-header h3 { font-size:.95rem; }
+  .tl-date { font-size:.75rem; color:var(--cyan); background:rgba(0,212,255,.1); padding:.2rem .6rem; border-radius:4px; }
+  .tl-company { font-size:.8rem; color:var(--purple); margin-bottom:.7rem; }
+  .tl-content ul { padding-left:1rem; color:var(--muted); font-size:.82rem; line-height:1.8; }
+  .tl-content ul li { margin-bottom:.3rem; }
+
+  /* EDUCATION */
+  #education { background:var(--bg2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .edu-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .edu-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-4px); }
+  .edu-icon { font-size:2rem; margin-bottom:1rem; }
+  .edu-card h3 { font-size:1rem; margin-bottom:.3rem; }
+  .edu-school { color:var(--cyan); font-size:.85rem; margin-bottom:.3rem; }
+  .edu-date { color:var(--muted); font-size:.8rem; margin-bottom:.8rem; }
+  .edu-gpa { display:inline-block; background:rgba(0,212,255,.1); color:var(--cyan); padding:.2rem .6rem; border-radius:4px; font-size:.8rem; margin-bottom:.8rem; }
+  .edu-courses { font-size:.78rem; color:var(--muted); line-height:1.7; }
+  .edu-courses strong { color:var(--text); display:block; margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-wrapper { max-width:600px; margin:0 auto; text-align:center; }
+  .contact-wrapper p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .contact-item {
+    display:flex; align-items:center; gap:.6rem;
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:.9rem 1.4rem; text-decoration:none; color:var(--text);
+    font-size:.9rem; transition:.3s;
+  }
+  .contact-item:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,.15); }
+  .contact-item span:first-child { font-size:1.2rem; }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem; color:var(--muted); font-size:.8rem; }
+  footer span { color:var(--cyan); }
+
+  @media(max-width:768px) {
+    .hero-visual { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2rem; }
+    nav { padding:0 4%; }
+    .nav-links { gap:1.2rem; }
+    .nav-links li:nth-child(n+4) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">&lt;SY /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🤖 Robotics Engineer</div>
+    <h1>Hi, I'm <span>Shoukang Yu</span></h1>
+    <p class="hero-sub">
+      Master's student at <strong>Northeastern University</strong> specializing in
+      <strong>autonomous robotics</strong>, ROS2, SLAM, and computer vision.
+      Building intelligent systems that bridge hardware and software.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-icon">🤖</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// who am i</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a robotics engineer passionate about building <strong>autonomous systems</strong> that interact intelligently with the real world. Currently pursuing my Master's in Electrical & Computer Engineering at Northeastern University with a perfect 4.0 GPA.</p>
+      <p>My work spans <strong>ROS2 development</strong>, SLAM-based navigation, computer vision for defect detection, and industrial robot programming. I enjoy bridging theory and hands-on implementation.</p>
+      <p>Previously interned at <strong>Dongfeng Motor Corporation</strong> where I programmed ABB six-axis robots, and at <strong>Vtech Holdings</strong> in mold engineering and process optimization.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">4.0</div><div class="stat-label">GPA</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Industry Internships</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
+      </div>
+    </div>
+    <ul class="info-list">
+      <li><span>📍</span><div><div style="font-size:.75rem;color:var(--muted)">Location</div><strong>Boston, MA</strong></div></li>
+      <li><span>🎓</span><div><div style="font-size:.75rem;color:var(--muted)">University</div><strong>Northeastern University</strong></div></li>
+      <li><span>📚</span><div><div style="font-size:.75rem;color:var(--muted)">Degree</div><strong>M.S. Electrical & Computer Engineering</strong></div></li>
+      <li><span>⚙️</span><div><div style="font-size:.75rem;color:var(--muted)">Focus</div><strong>Autonomous Robotics & ROS2</strong></div></li>
+      <li><span>📧</span><div><div style="font-size:.75rem;color:var(--muted)">Email</div><strong>yu.sho@northeastern.edu</strong></div></li>
+      <li><span>🔗</span><div><div style="font-size:.75rem;color:var(--muted)">GitHub</div><strong>github.com/ShoukangYu</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="icon">🤖</span> Robotics & Autonomy</h3>
+      <div class="tag-list">
+        <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">ROS</span>
+        <span class="tag">Kalman Filters</span><span class="tag">Kinematics</span>
+        <span class="tag">Dynamics</span><span class="tag">Sensor Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">👁️</span> Vision & AI</h3>
+      <div class="tag-list">
+        <span class="tag">OpenCV</span><span class="tag">HALCON</span>
+        <span class="tag">Reinforcement Learning</span><span class="tag">Machine Learning</span>
+        <span class="tag">Image Processing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">💻</span> Programming</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span><span class="tag">C/C++</span>
+        <span class="tag">MATLAB</span><span class="tag">Arduino</span>
+        <span class="tag">LabVIEW</span><span class="tag">RAPID</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🔧</span> Hardware & CAD</h3>
+      <div class="tag-list">
+        <span class="tag">SolidWorks</span><span class="tag">CREO</span>
+        <span class="tag">AutoCAD</span><span class="tag">ANSYS</span>
+        <span class="tag">3D Printing</span><span class="tag">CNC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🗄️</span> Databases & Dev</h3>
+      <div class="tag-list">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Git</span>
+        <span class="tag">Linux</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🏭</span> Manufacturing</h3>
+      <div class="tag-list">
+        <span class="tag">Product Development</span><span class="tag">Process Optimization</span>
+        <span class="tag">Quality Control</span><span class="tag">OpenLCA</span>
+        <span class="tag">Injection Molding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// what i've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01 / ROBOTICS</div>
+      <h3>ROS2 Autonomous Explorer</h3>
+      <p>Implemented autonomous exploration and mapping for mobile robots using ROS2. Features Wanderer (random obstacle avoidance) and Discoverer (frontier-based exploration) algorithms with SLAM-based navigation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">ROS2</span><span class="proj-tag">SLAM</span>
+        <span class="proj-tag">Python</span><span class="proj-tag">LaserScan</span>
+        <span class="proj-tag">Autonomous Nav</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+        <a href="#" class="proj-link">⟶ Demo</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02 / COMPUTER VISION</div>
+      <h3>Automated Chip Fault Detection</h3>
+      <p>Automated visual inspection system for chip defect detection. Designed a chip positioning system with visual calibration and X/Y axis motion control, plus an image processing pipeline using HALCON for defect detection.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">C++</span><span class="proj-tag">HALCON</span>
+        <span class="proj-tag">Computer Vision</span><span class="proj-tag">Motion Control</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03 / HRI</div>
+      <h3>Voice-Controlled Robot Interface</h3>
+      <p>Real-time voice recognition system for human-robot interaction. Built audio signal acquisition and processing using MyDAQ and LabVIEW with iFlytek Speech SDK for speaker identification and command execution.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">LabVIEW</span><span class="proj-tag">MyDAQ</span>
+        <span class="proj-tag">Speech SDK</span><span class="proj-tag">HRI</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04 / INDUSTRIAL ROBOTICS</div>
+      <h3>ABB Robot Automation System</h3>
+      <p>Programmed a six-axis ABB robot for block grasping and stacking operations at Dongfeng Motor. Defined motion paths, I/O control, and gripper sequences in RAPID language for automated material handling.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RAPID</span><span class="proj-tag">ABB Robot</span>
+        <span class="proj-tag">Automation</span><span class="proj-tag">Industrial</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏭</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mechanical Engineering Intern</h3>
+          <span class="tl-date">Apr 2024 – Jul 2024</span>
+        </div>
+        <div class="tl-company">Dongfeng Motor Corporation · Shiyan, China</div>
+        <ul>
+          <li>Programmed six-axis ABB robot using RAPID language for block grasping and stacking operations</li>
+          <li>Defined motion paths, I/O control, and gripper sequences for automated material handling on production line</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">⚙️</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mold Design & Manufacturing Intern</h3>
+          <span class="tl-date">Jul 2024 – Sep 2024</span>
+        </div>
+        <div class="tl-company">Vtech Holdings Limited · Dongguan, China</div>
+        <ul>
+          <li>Evaluated mold structures and injection molding processes by analyzing 3D assemblies in CREO</li>
+          <li>Identified root causes of production anomalies, reducing defect occurrences</li>
+          <li>Designed 3D mold assemblies including gating, ejection, and cooling systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <div class="section-tag">// academic background</div>
+    <h2 class="section-title">Edu<span>cation</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <h3>M.S. Electrical & Computer Engineering</h3>
+      <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="edu-date">Sep 2025 – Apr 2027</div>
+      <div class="edu-gpa">GPA: 4.00 / 4.00</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Mobile Robotics · Reinforcement Learning · Database Management Systems · Applied Probability & Stochastic Processes
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <h3>B.E. Intelligent Manufacturing Engineering</h3>
+      <div class="edu-school">Shantou University · Shantou, China</div>
+      <div class="edu-date">Sep 2021 – Jun 2025</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Programming Design · Engineering Mechanics · Machine Learning · Intelligent System Design
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// let's connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <p>I'm currently open to robotics engineering roles, research collaborations, and interesting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:yu.sho@northeastern.edu" class="contact-item">
+        <span>📧</span> yu.sho@northeastern.edu
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span>🐙</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Shoukang Yu</span> · 2025</p>
+</footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoukang Yu | Robotics Engineer</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e35;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --pink: #ff006e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --grad: linear-gradient(135deg, #00d4ff, #7c3aed);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; overflow-x:hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:60px;
+  }
+  .logo { font-size:1.2rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s; }
+  .nav-links a:hover { color:var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:80px 10% 0;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.1) 0%, transparent 50%);
+  }
+  /* grid lines */
+  .hero-bg::after {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .hero-content { position:relative; z-index:1; max-width:650px; }
+  .hero-tag {
+    display:inline-block; padding:.3rem .8rem; border-radius:20px;
+    border:1px solid var(--cyan); color:var(--cyan); font-size:.8rem;
+    margin-bottom:1.5rem; letter-spacing:.05em;
+  }
+  .hero-content h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
+  .hero-content h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+  .hero-sub strong { color:var(--cyan); }
+  .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding:.75rem 1.8rem; border-radius:8px; font-size:.95rem; cursor:pointer;
+    text-decoration:none; transition:.3s; font-weight:600;
+  }
+  .btn-primary {
+    background:var(--grad); color:#fff;
+    box-shadow:0 0 20px rgba(0,212,255,.3);
+  }
+  .btn-primary:hover { box-shadow:0 0 35px rgba(0,212,255,.5); transform:translateY(-2px); }
+  .btn-outline {
+    border:1px solid var(--border); color:var(--text); background:transparent;
+  }
+  .btn-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  /* floating robot icon */
+  .hero-visual {
+    position:absolute; right:8%; top:50%; transform:translateY(-50%);
+    width:320px; height:320px; display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .robo-ring {
+    position:absolute; border-radius:50%;
+    border:1px solid;
+    animation:spin linear infinite;
+  }
+  .robo-ring:nth-child(1) { width:300px;height:300px; border-color:rgba(0,212,255,.2); animation-duration:20s; }
+  .robo-ring:nth-child(2) { width:220px;height:220px; border-color:rgba(124,58,237,.3); animation-duration:14s; animation-direction:reverse; }
+  .robo-ring:nth-child(3) { width:140px;height:140px; border-color:rgba(0,212,255,.4); animation-duration:8s; }
+  .robo-icon { font-size:4rem; z-index:1; filter:drop-shadow(0 0 20px #00d4ff); }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  /* SECTIONS */
+  section { padding:90px 10%; }
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-tag { color:var(--cyan); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; }
+  .section-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .divider { width:60px; height:3px; background:var(--grad); margin:.8rem auto 0; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--bg2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
+  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
+  .about-text p strong { color:var(--cyan); }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:1rem; text-align:center;
+  }
+  .stat-num { font-size:1.6rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .info-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+  .info-list li { display:flex; align-items:center; gap:.8rem; font-size:.9rem; color:var(--muted); }
+  .info-list li span:first-child { color:var(--cyan); font-size:1rem; }
+  .info-list li strong { color:var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1.5rem; transition:.3s;
+  }
+  .skill-card:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,212,255,.1); }
+  .skill-card h3 { font-size:.95rem; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; }
+  .skill-card h3 .icon { font-size:1.3rem; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .tag {
+    padding:.3rem .7rem; border-radius:20px; font-size:.75rem;
+    border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+    transition:.3s;
+  }
+  .skill-card:hover .tag { border-color:rgba(0,212,255,.3); color:var(--text); }
+
+  /* PROJECTS */
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .proj-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .proj-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .proj-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.3); box-shadow:0 15px 40px rgba(0,0,0,.4); }
+  .proj-num { font-size:.75rem; color:var(--cyan); letter-spacing:.1em; margin-bottom:.5rem; }
+  .proj-card h3 { font-size:1.05rem; margin-bottom:.5rem; }
+  .proj-card p { color:var(--muted); font-size:.85rem; line-height:1.7; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
+  .proj-tag { padding:.2rem .6rem; background:rgba(124,58,237,.15); color:#a78bfa; border-radius:4px; font-size:.72rem; border:1px solid rgba(124,58,237,.3); }
+  .proj-links { display:flex; gap:.8rem; }
+  .proj-link { font-size:.8rem; color:var(--cyan); text-decoration:none; display:flex; align-items:center; gap:.3rem; transition:.3s; }
+  .proj-link:hover { color:#fff; }
+
+  /* EXPERIENCE */
+  .timeline { max-width:750px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(var(--cyan),var(--purple)); }
+  .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; }
+  .tl-dot {
+    width:42px; height:42px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; position:relative; z-index:1;
+    box-shadow:0 0 15px rgba(0,212,255,.4);
+  }
+  .tl-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; flex:1; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; margin-bottom:.3rem; }
+  .tl-header h3 { font-size:.95rem; }
+  .tl-date { font-size:.75rem; color:var(--cyan); background:rgba(0,212,255,.1); padding:.2rem .6rem; border-radius:4px; }
+  .tl-company { font-size:.8rem; color:var(--purple); margin-bottom:.7rem; }
+  .tl-content ul { padding-left:1rem; color:var(--muted); font-size:.82rem; line-height:1.8; }
+  .tl-content ul li { margin-bottom:.3rem; }
+
+  /* EDUCATION */
+  #education { background:var(--bg2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .edu-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .edu-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-4px); }
+  .edu-icon { font-size:2rem; margin-bottom:1rem; }
+  .edu-card h3 { font-size:1rem; margin-bottom:.3rem; }
+  .edu-school { color:var(--cyan); font-size:.85rem; margin-bottom:.3rem; }
+  .edu-date { color:var(--muted); font-size:.8rem; margin-bottom:.8rem; }
+  .edu-gpa { display:inline-block; background:rgba(0,212,255,.1); color:var(--cyan); padding:.2rem .6rem; border-radius:4px; font-size:.8rem; margin-bottom:.8rem; }
+  .edu-courses { font-size:.78rem; color:var(--muted); line-height:1.7; }
+  .edu-courses strong { color:var(--text); display:block; margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-wrapper { max-width:600px; margin:0 auto; text-align:center; }
+  .contact-wrapper p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .contact-item {
+    display:flex; align-items:center; gap:.6rem;
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:.9rem 1.4rem; text-decoration:none; color:var(--text);
+    font-size:.9rem; transition:.3s;
+  }
+  .contact-item:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,.15); }
+  .contact-item span:first-child { font-size:1.2rem; }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem; color:var(--muted); font-size:.8rem; }
+  footer span { color:var(--cyan); }
+
+  @media(max-width:768px) {
+    .hero-visual { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2rem; }
+    nav { padding:0 4%; }
+    .nav-links { gap:1.2rem; }
+    .nav-links li:nth-child(n+4) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">&lt;SY /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🤖 Robotics Engineer</div>
+    <h1>Hi, I'm <span>Shoukang Yu</span></h1>
+    <p class="hero-sub">
+      Master's student at <strong>Northeastern University</strong> specializing in
+      <strong>autonomous robotics</strong>, ROS2, SLAM, and computer vision.
+      Building intelligent systems that bridge hardware and software.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-icon">🤖</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// who am i</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a robotics engineer passionate about building <strong>autonomous systems</strong> that interact intelligently with the real world. Currently pursuing my Master's in Electrical & Computer Engineering at Northeastern University with a perfect 4.0 GPA.</p>
+      <p>My work spans <strong>ROS2 development</strong>, SLAM-based navigation, computer vision for defect detection, and industrial robot programming. I enjoy bridging theory and hands-on implementation.</p>
+      <p>Previously interned at <strong>Dongfeng Motor Corporation</strong> where I programmed ABB six-axis robots, and at <strong>Vtech Holdings</strong> in mold engineering and process optimization.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">4.0</div><div class="stat-label">GPA</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Industry Internships</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
+      </div>
+    </div>
+    <ul class="info-list">
+      <li><span>📍</span><div><div style="font-size:.75rem;color:var(--muted)">Location</div><strong>Boston, MA</strong></div></li>
+      <li><span>🎓</span><div><div style="font-size:.75rem;color:var(--muted)">University</div><strong>Northeastern University</strong></div></li>
+      <li><span>📚</span><div><div style="font-size:.75rem;color:var(--muted)">Degree</div><strong>M.S. Electrical & Computer Engineering</strong></div></li>
+      <li><span>⚙️</span><div><div style="font-size:.75rem;color:var(--muted)">Focus</div><strong>Autonomous Robotics & ROS2</strong></div></li>
+      <li><span>📧</span><div><div style="font-size:.75rem;color:var(--muted)">Email</div><strong>yu.sho@northeastern.edu</strong></div></li>
+      <li><span>🔗</span><div><div style="font-size:.75rem;color:var(--muted)">GitHub</div><strong>github.com/ShoukangYu</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="icon">🤖</span> Robotics & Autonomy</h3>
+      <div class="tag-list">
+        <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">ROS</span>
+        <span class="tag">Kalman Filters</span><span class="tag">Kinematics</span>
+        <span class="tag">Dynamics</span><span class="tag">Sensor Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">👁️</span> Vision & AI</h3>
+      <div class="tag-list">
+        <span class="tag">OpenCV</span><span class="tag">HALCON</span>
+        <span class="tag">Reinforcement Learning</span><span class="tag">Machine Learning</span>
+        <span class="tag">Image Processing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">💻</span> Programming</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span><span class="tag">C/C++</span>
+        <span class="tag">MATLAB</span><span class="tag">Arduino</span>
+        <span class="tag">LabVIEW</span><span class="tag">RAPID</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🔧</span> Hardware & CAD</h3>
+      <div class="tag-list">
+        <span class="tag">SolidWorks</span><span class="tag">CREO</span>
+        <span class="tag">AutoCAD</span><span class="tag">ANSYS</span>
+        <span class="tag">3D Printing</span><span class="tag">CNC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🗄️</span> Databases & Dev</h3>
+      <div class="tag-list">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Git</span>
+        <span class="tag">Linux</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🏭</span> Manufacturing</h3>
+      <div class="tag-list">
+        <span class="tag">Product Development</span><span class="tag">Process Optimization</span>
+        <span class="tag">Quality Control</span><span class="tag">OpenLCA</span>
+        <span class="tag">Injection Molding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// what i've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01 / ROBOTICS</div>
+      <h3>ROS2 Autonomous Explorer</h3>
+      <p>Implemented autonomous exploration and mapping for mobile robots using ROS2. Features Wanderer (random obstacle avoidance) and Discoverer (frontier-based exploration) algorithms with SLAM-based navigation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">ROS2</span><span class="proj-tag">SLAM</span>
+        <span class="proj-tag">Python</span><span class="proj-tag">LaserScan</span>
+        <span class="proj-tag">Autonomous Nav</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+        <a href="#" class="proj-link">⟶ Demo</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02 / COMPUTER VISION</div>
+      <h3>Automated Chip Fault Detection</h3>
+      <p>Automated visual inspection system for chip defect detection. Designed a chip positioning system with visual calibration and X/Y axis motion control, plus an image processing pipeline using HALCON for defect detection.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">C++</span><span class="proj-tag">HALCON</span>
+        <span class="proj-tag">Computer Vision</span><span class="proj-tag">Motion Control</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03 / HRI</div>
+      <h3>Voice-Controlled Robot Interface</h3>
+      <p>Real-time voice recognition system for human-robot interaction. Built audio signal acquisition and processing using MyDAQ and LabVIEW with iFlytek Speech SDK for speaker identification and command execution.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">LabVIEW</span><span class="proj-tag">MyDAQ</span>
+        <span class="proj-tag">Speech SDK</span><span class="proj-tag">HRI</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04 / INDUSTRIAL ROBOTICS</div>
+      <h3>ABB Robot Automation System</h3>
+      <p>Programmed a six-axis ABB robot for block grasping and stacking operations at Dongfeng Motor. Defined motion paths, I/O control, and gripper sequences in RAPID language for automated material handling.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RAPID</span><span class="proj-tag">ABB Robot</span>
+        <span class="proj-tag">Automation</span><span class="proj-tag">Industrial</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏭</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mechanical Engineering Intern</h3>
+          <span class="tl-date">Apr 2024 – Jul 2024</span>
+        </div>
+        <div class="tl-company">Dongfeng Motor Corporation · Shiyan, China</div>
+        <ul>
+          <li>Programmed six-axis ABB robot using RAPID language for block grasping and stacking operations</li>
+          <li>Defined motion paths, I/O control, and gripper sequences for automated material handling on production line</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">⚙️</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mold Design & Manufacturing Intern</h3>
+          <span class="tl-date">Jul 2024 – Sep 2024</span>
+        </div>
+        <div class="tl-company">Vtech Holdings Limited · Dongguan, China</div>
+        <ul>
+          <li>Evaluated mold structures and injection molding processes by analyzing 3D assemblies in CREO</li>
+          <li>Identified root causes of production anomalies, reducing defect occurrences</li>
+          <li>Designed 3D mold assemblies including gating, ejection, and cooling systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <div class="section-tag">// academic background</div>
+    <h2 class="section-title">Edu<span>cation</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <h3>M.S. Electrical & Computer Engineering</h3>
+      <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="edu-date">Sep 2025 – Apr 2027</div>
+      <div class="edu-gpa">GPA: 4.00 / 4.00</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Mobile Robotics · Reinforcement Learning · Database Management Systems · Applied Probability & Stochastic Processes
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <h3>B.E. Intelligent Manufacturing Engineering</h3>
+      <div class="edu-school">Shantou University · Shantou, China</div>
+      <div class="edu-date">Sep 2021 – Jun 2025</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Programming Design · Engineering Mechanics · Machine Learning · Intelligent System Design
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// let's connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <p>I'm currently open to robotics engineering roles, research collaborations, and interesting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:yu.sho@northeastern.edu" class="contact-item">
+        <span>📧</span> yu.sho@northeastern.edu
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span>🐙</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Shoukang Yu</span> · 2025</p>
+</footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoukang Yu | Robotics Engineer</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e35;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --pink: #ff006e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --grad: linear-gradient(135deg, #00d4ff, #7c3aed);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; overflow-x:hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:60px;
+  }
+  .logo { font-size:1.2rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s; }
+  .nav-links a:hover { color:var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:80px 10% 0;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.1) 0%, transparent 50%);
+  }
+  /* grid lines */
+  .hero-bg::after {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .hero-content { position:relative; z-index:1; max-width:650px; }
+  .hero-tag {
+    display:inline-block; padding:.3rem .8rem; border-radius:20px;
+    border:1px solid var(--cyan); color:var(--cyan); font-size:.8rem;
+    margin-bottom:1.5rem; letter-spacing:.05em;
+  }
+  .hero-content h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
+  .hero-content h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+  .hero-sub strong { color:var(--cyan); }
+  .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding:.75rem 1.8rem; border-radius:8px; font-size:.95rem; cursor:pointer;
+    text-decoration:none; transition:.3s; font-weight:600;
+  }
+  .btn-primary {
+    background:var(--grad); color:#fff;
+    box-shadow:0 0 20px rgba(0,212,255,.3);
+  }
+  .btn-primary:hover { box-shadow:0 0 35px rgba(0,212,255,.5); transform:translateY(-2px); }
+  .btn-outline {
+    border:1px solid var(--border); color:var(--text); background:transparent;
+  }
+  .btn-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  /* floating robot icon */
+  .hero-visual {
+    position:absolute; right:8%; top:50%; transform:translateY(-50%);
+    width:320px; height:320px; display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .robo-ring {
+    position:absolute; border-radius:50%;
+    border:1px solid;
+    animation:spin linear infinite;
+  }
+  .robo-ring:nth-child(1) { width:300px;height:300px; border-color:rgba(0,212,255,.2); animation-duration:20s; }
+  .robo-ring:nth-child(2) { width:220px;height:220px; border-color:rgba(124,58,237,.3); animation-duration:14s; animation-direction:reverse; }
+  .robo-ring:nth-child(3) { width:140px;height:140px; border-color:rgba(0,212,255,.4); animation-duration:8s; }
+  .robo-icon { font-size:4rem; z-index:1; filter:drop-shadow(0 0 20px #00d4ff); }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  /* SECTIONS */
+  section { padding:90px 10%; }
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-tag { color:var(--cyan); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; }
+  .section-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .divider { width:60px; height:3px; background:var(--grad); margin:.8rem auto 0; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--bg2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
+  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
+  .about-text p strong { color:var(--cyan); }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:1rem; text-align:center;
+  }
+  .stat-num { font-size:1.6rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .info-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+  .info-list li { display:flex; align-items:center; gap:.8rem; font-size:.9rem; color:var(--muted); }
+  .info-list li span:first-child { color:var(--cyan); font-size:1rem; }
+  .info-list li strong { color:var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1.5rem; transition:.3s;
+  }
+  .skill-card:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,212,255,.1); }
+  .skill-card h3 { font-size:.95rem; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; }
+  .skill-card h3 .icon { font-size:1.3rem; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .tag {
+    padding:.3rem .7rem; border-radius:20px; font-size:.75rem;
+    border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+    transition:.3s;
+  }
+  .skill-card:hover .tag { border-color:rgba(0,212,255,.3); color:var(--text); }
+
+  /* PROJECTS */
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .proj-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .proj-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .proj-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.3); box-shadow:0 15px 40px rgba(0,0,0,.4); }
+  .proj-num { font-size:.75rem; color:var(--cyan); letter-spacing:.1em; margin-bottom:.5rem; }
+  .proj-card h3 { font-size:1.05rem; margin-bottom:.5rem; }
+  .proj-card p { color:var(--muted); font-size:.85rem; line-height:1.7; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
+  .proj-tag { padding:.2rem .6rem; background:rgba(124,58,237,.15); color:#a78bfa; border-radius:4px; font-size:.72rem; border:1px solid rgba(124,58,237,.3); }
+  .proj-links { display:flex; gap:.8rem; }
+  .proj-link { font-size:.8rem; color:var(--cyan); text-decoration:none; display:flex; align-items:center; gap:.3rem; transition:.3s; }
+  .proj-link:hover { color:#fff; }
+
+  /* EXPERIENCE */
+  .timeline { max-width:750px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(var(--cyan),var(--purple)); }
+  .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; }
+  .tl-dot {
+    width:42px; height:42px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; position:relative; z-index:1;
+    box-shadow:0 0 15px rgba(0,212,255,.4);
+  }
+  .tl-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; flex:1; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; margin-bottom:.3rem; }
+  .tl-header h3 { font-size:.95rem; }
+  .tl-date { font-size:.75rem; color:var(--cyan); background:rgba(0,212,255,.1); padding:.2rem .6rem; border-radius:4px; }
+  .tl-company { font-size:.8rem; color:var(--purple); margin-bottom:.7rem; }
+  .tl-content ul { padding-left:1rem; color:var(--muted); font-size:.82rem; line-height:1.8; }
+  .tl-content ul li { margin-bottom:.3rem; }
+
+  /* EDUCATION */
+  #education { background:var(--bg2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .edu-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .edu-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-4px); }
+  .edu-icon { font-size:2rem; margin-bottom:1rem; }
+  .edu-card h3 { font-size:1rem; margin-bottom:.3rem; }
+  .edu-school { color:var(--cyan); font-size:.85rem; margin-bottom:.3rem; }
+  .edu-date { color:var(--muted); font-size:.8rem; margin-bottom:.8rem; }
+  .edu-gpa { display:inline-block; background:rgba(0,212,255,.1); color:var(--cyan); padding:.2rem .6rem; border-radius:4px; font-size:.8rem; margin-bottom:.8rem; }
+  .edu-courses { font-size:.78rem; color:var(--muted); line-height:1.7; }
+  .edu-courses strong { color:var(--text); display:block; margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-wrapper { max-width:600px; margin:0 auto; text-align:center; }
+  .contact-wrapper p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .contact-item {
+    display:flex; align-items:center; gap:.6rem;
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:.9rem 1.4rem; text-decoration:none; color:var(--text);
+    font-size:.9rem; transition:.3s;
+  }
+  .contact-item:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,.15); }
+  .contact-item span:first-child { font-size:1.2rem; }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem; color:var(--muted); font-size:.8rem; }
+  footer span { color:var(--cyan); }
+
+  @media(max-width:768px) {
+    .hero-visual { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2rem; }
+    nav { padding:0 4%; }
+    .nav-links { gap:1.2rem; }
+    .nav-links li:nth-child(n+4) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">&lt;SY /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🤖 Robotics Engineer</div>
+    <h1>Hi, I'm <span>Shoukang Yu</span></h1>
+    <p class="hero-sub">
+      Master's student at <strong>Northeastern University</strong> specializing in
+      <strong>autonomous robotics</strong>, ROS2, SLAM, and computer vision.
+      Building intelligent systems that bridge hardware and software.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-icon">🤖</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// who am i</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a robotics engineer passionate about building <strong>autonomous systems</strong> that interact intelligently with the real world. Currently pursuing my Master's in Electrical & Computer Engineering at Northeastern University with a perfect 4.0 GPA.</p>
+      <p>My work spans <strong>ROS2 development</strong>, SLAM-based navigation, computer vision for defect detection, and industrial robot programming. I enjoy bridging theory and hands-on implementation.</p>
+      <p>Previously interned at <strong>Dongfeng Motor Corporation</strong> where I programmed ABB six-axis robots, and at <strong>Vtech Holdings</strong> in mold engineering and process optimization.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">4.0</div><div class="stat-label">GPA</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Industry Internships</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
+      </div>
+    </div>
+    <ul class="info-list">
+      <li><span>📍</span><div><div style="font-size:.75rem;color:var(--muted)">Location</div><strong>Boston, MA</strong></div></li>
+      <li><span>🎓</span><div><div style="font-size:.75rem;color:var(--muted)">University</div><strong>Northeastern University</strong></div></li>
+      <li><span>📚</span><div><div style="font-size:.75rem;color:var(--muted)">Degree</div><strong>M.S. Electrical & Computer Engineering</strong></div></li>
+      <li><span>⚙️</span><div><div style="font-size:.75rem;color:var(--muted)">Focus</div><strong>Autonomous Robotics & ROS2</strong></div></li>
+      <li><span>📧</span><div><div style="font-size:.75rem;color:var(--muted)">Email</div><strong>yu.sho@northeastern.edu</strong></div></li>
+      <li><span>🔗</span><div><div style="font-size:.75rem;color:var(--muted)">GitHub</div><strong>github.com/ShoukangYu</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="icon">🤖</span> Robotics & Autonomy</h3>
+      <div class="tag-list">
+        <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">ROS</span>
+        <span class="tag">Kalman Filters</span><span class="tag">Kinematics</span>
+        <span class="tag">Dynamics</span><span class="tag">Sensor Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">👁️</span> Vision & AI</h3>
+      <div class="tag-list">
+        <span class="tag">OpenCV</span><span class="tag">HALCON</span>
+        <span class="tag">Reinforcement Learning</span><span class="tag">Machine Learning</span>
+        <span class="tag">Image Processing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">💻</span> Programming</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span><span class="tag">C/C++</span>
+        <span class="tag">MATLAB</span><span class="tag">Arduino</span>
+        <span class="tag">LabVIEW</span><span class="tag">RAPID</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🔧</span> Hardware & CAD</h3>
+      <div class="tag-list">
+        <span class="tag">SolidWorks</span><span class="tag">CREO</span>
+        <span class="tag">AutoCAD</span><span class="tag">ANSYS</span>
+        <span class="tag">3D Printing</span><span class="tag">CNC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🗄️</span> Databases & Dev</h3>
+      <div class="tag-list">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Git</span>
+        <span class="tag">Linux</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🏭</span> Manufacturing</h3>
+      <div class="tag-list">
+        <span class="tag">Product Development</span><span class="tag">Process Optimization</span>
+        <span class="tag">Quality Control</span><span class="tag">OpenLCA</span>
+        <span class="tag">Injection Molding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// what i've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01 / ROBOTICS</div>
+      <h3>ROS2 Autonomous Explorer</h3>
+      <p>Implemented autonomous exploration and mapping for mobile robots using ROS2. Features Wanderer (random obstacle avoidance) and Discoverer (frontier-based exploration) algorithms with SLAM-based navigation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">ROS2</span><span class="proj-tag">SLAM</span>
+        <span class="proj-tag">Python</span><span class="proj-tag">LaserScan</span>
+        <span class="proj-tag">Autonomous Nav</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+        <a href="#" class="proj-link">⟶ Demo</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02 / COMPUTER VISION</div>
+      <h3>Automated Chip Fault Detection</h3>
+      <p>Automated visual inspection system for chip defect detection. Designed a chip positioning system with visual calibration and X/Y axis motion control, plus an image processing pipeline using HALCON for defect detection.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">C++</span><span class="proj-tag">HALCON</span>
+        <span class="proj-tag">Computer Vision</span><span class="proj-tag">Motion Control</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03 / HRI</div>
+      <h3>Voice-Controlled Robot Interface</h3>
+      <p>Real-time voice recognition system for human-robot interaction. Built audio signal acquisition and processing using MyDAQ and LabVIEW with iFlytek Speech SDK for speaker identification and command execution.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">LabVIEW</span><span class="proj-tag">MyDAQ</span>
+        <span class="proj-tag">Speech SDK</span><span class="proj-tag">HRI</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04 / INDUSTRIAL ROBOTICS</div>
+      <h3>ABB Robot Automation System</h3>
+      <p>Programmed a six-axis ABB robot for block grasping and stacking operations at Dongfeng Motor. Defined motion paths, I/O control, and gripper sequences in RAPID language for automated material handling.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RAPID</span><span class="proj-tag">ABB Robot</span>
+        <span class="proj-tag">Automation</span><span class="proj-tag">Industrial</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏭</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mechanical Engineering Intern</h3>
+          <span class="tl-date">Apr 2024 – Jul 2024</span>
+        </div>
+        <div class="tl-company">Dongfeng Motor Corporation · Shiyan, China</div>
+        <ul>
+          <li>Programmed six-axis ABB robot using RAPID language for block grasping and stacking operations</li>
+          <li>Defined motion paths, I/O control, and gripper sequences for automated material handling on production line</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">⚙️</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mold Design & Manufacturing Intern</h3>
+          <span class="tl-date">Jul 2024 – Sep 2024</span>
+        </div>
+        <div class="tl-company">Vtech Holdings Limited · Dongguan, China</div>
+        <ul>
+          <li>Evaluated mold structures and injection molding processes by analyzing 3D assemblies in CREO</li>
+          <li>Identified root causes of production anomalies, reducing defect occurrences</li>
+          <li>Designed 3D mold assemblies including gating, ejection, and cooling systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <div class="section-tag">// academic background</div>
+    <h2 class="section-title">Edu<span>cation</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <h3>M.S. Electrical & Computer Engineering</h3>
+      <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="edu-date">Sep 2025 – Apr 2027</div>
+      <div class="edu-gpa">GPA: 4.00 / 4.00</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Mobile Robotics · Reinforcement Learning · Database Management Systems · Applied Probability & Stochastic Processes
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <h3>B.E. Intelligent Manufacturing Engineering</h3>
+      <div class="edu-school">Shantou University · Shantou, China</div>
+      <div class="edu-date">Sep 2021 – Jun 2025</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Programming Design · Engineering Mechanics · Machine Learning · Intelligent System Design
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// let's connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <p>I'm currently open to robotics engineering roles, research collaborations, and interesting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:yu.sho@northeastern.edu" class="contact-item">
+        <span>📧</span> yu.sho@northeastern.edu
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span>🐙</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Shoukang Yu</span> · 2025</p>
+</footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shoukang Yu | Robotics Engineer</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --card: #13131f;
+    --border: #1e1e35;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --pink: #ff006e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --grad: linear-gradient(135deg, #00d4ff, #7c3aed);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',sans-serif; overflow-x:hidden; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--purple); border-radius:3px; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:60px;
+  }
+  .logo { font-size:1.2rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; transition:.3s; }
+  .nav-links a:hover { color:var(--cyan); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center;
+    padding:80px 10% 0;
+    position:relative; overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(124,58,237,.1) 0%, transparent 50%);
+  }
+  /* grid lines */
+  .hero-bg::after {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .hero-content { position:relative; z-index:1; max-width:650px; }
+  .hero-tag {
+    display:inline-block; padding:.3rem .8rem; border-radius:20px;
+    border:1px solid var(--cyan); color:var(--cyan); font-size:.8rem;
+    margin-bottom:1.5rem; letter-spacing:.05em;
+  }
+  .hero-content h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
+  .hero-content h1 span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:1.1rem; color:var(--muted); margin-bottom:2rem; line-height:1.7; }
+  .hero-sub strong { color:var(--cyan); }
+  .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn {
+    padding:.75rem 1.8rem; border-radius:8px; font-size:.95rem; cursor:pointer;
+    text-decoration:none; transition:.3s; font-weight:600;
+  }
+  .btn-primary {
+    background:var(--grad); color:#fff;
+    box-shadow:0 0 20px rgba(0,212,255,.3);
+  }
+  .btn-primary:hover { box-shadow:0 0 35px rgba(0,212,255,.5); transform:translateY(-2px); }
+  .btn-outline {
+    border:1px solid var(--border); color:var(--text); background:transparent;
+  }
+  .btn-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  /* floating robot icon */
+  .hero-visual {
+    position:absolute; right:8%; top:50%; transform:translateY(-50%);
+    width:320px; height:320px; display:flex; align-items:center; justify-content:center;
+    z-index:1;
+  }
+  .robo-ring {
+    position:absolute; border-radius:50%;
+    border:1px solid;
+    animation:spin linear infinite;
+  }
+  .robo-ring:nth-child(1) { width:300px;height:300px; border-color:rgba(0,212,255,.2); animation-duration:20s; }
+  .robo-ring:nth-child(2) { width:220px;height:220px; border-color:rgba(124,58,237,.3); animation-duration:14s; animation-direction:reverse; }
+  .robo-ring:nth-child(3) { width:140px;height:140px; border-color:rgba(0,212,255,.4); animation-duration:8s; }
+  .robo-icon { font-size:4rem; z-index:1; filter:drop-shadow(0 0 20px #00d4ff); }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  /* SECTIONS */
+  section { padding:90px 10%; }
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-tag { color:var(--cyan); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; }
+  .section-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .divider { width:60px; height:3px; background:var(--grad); margin:.8rem auto 0; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--bg2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1000px; margin:0 auto; }
+  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; font-size:.95rem; }
+  .about-text p strong { color:var(--cyan); }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:1rem; text-align:center;
+  }
+  .stat-num { font-size:1.6rem; font-weight:700; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .stat-label { font-size:.75rem; color:var(--muted); margin-top:.2rem; }
+  .info-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
+  .info-list li { display:flex; align-items:center; gap:.8rem; font-size:.9rem; color:var(--muted); }
+  .info-list li span:first-child { color:var(--cyan); font-size:1rem; }
+  .info-list li strong { color:var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .skill-card {
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    padding:1.5rem; transition:.3s;
+  }
+  .skill-card:hover { border-color:var(--cyan); transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,212,255,.1); }
+  .skill-card h3 { font-size:.95rem; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; }
+  .skill-card h3 .icon { font-size:1.3rem; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .tag {
+    padding:.3rem .7rem; border-radius:20px; font-size:.75rem;
+    border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+    transition:.3s;
+  }
+  .skill-card:hover .tag { border-color:rgba(0,212,255,.3); color:var(--text); }
+
+  /* PROJECTS */
+  #projects { background:var(--bg2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .proj-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .proj-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .proj-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,.3); box-shadow:0 15px 40px rgba(0,0,0,.4); }
+  .proj-num { font-size:.75rem; color:var(--cyan); letter-spacing:.1em; margin-bottom:.5rem; }
+  .proj-card h3 { font-size:1.05rem; margin-bottom:.5rem; }
+  .proj-card p { color:var(--muted); font-size:.85rem; line-height:1.7; margin-bottom:1rem; }
+  .proj-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
+  .proj-tag { padding:.2rem .6rem; background:rgba(124,58,237,.15); color:#a78bfa; border-radius:4px; font-size:.72rem; border:1px solid rgba(124,58,237,.3); }
+  .proj-links { display:flex; gap:.8rem; }
+  .proj-link { font-size:.8rem; color:var(--cyan); text-decoration:none; display:flex; align-items:center; gap:.3rem; transition:.3s; }
+  .proj-link:hover { color:#fff; }
+
+  /* EXPERIENCE */
+  .timeline { max-width:750px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(var(--cyan),var(--purple)); }
+  .tl-item { display:flex; gap:2rem; margin-bottom:2.5rem; }
+  .tl-dot {
+    width:42px; height:42px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; position:relative; z-index:1;
+    box-shadow:0 0 15px rgba(0,212,255,.4);
+  }
+  .tl-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; flex:1; }
+  .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.5rem; margin-bottom:.3rem; }
+  .tl-header h3 { font-size:.95rem; }
+  .tl-date { font-size:.75rem; color:var(--cyan); background:rgba(0,212,255,.1); padding:.2rem .6rem; border-radius:4px; }
+  .tl-company { font-size:.8rem; color:var(--purple); margin-bottom:.7rem; }
+  .tl-content ul { padding-left:1rem; color:var(--muted); font-size:.82rem; line-height:1.8; }
+  .tl-content ul li { margin-bottom:.3rem; }
+
+  /* EDUCATION */
+  #education { background:var(--bg2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .edu-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:1.8rem; transition:.3s; position:relative; overflow:hidden;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--grad);
+  }
+  .edu-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-4px); }
+  .edu-icon { font-size:2rem; margin-bottom:1rem; }
+  .edu-card h3 { font-size:1rem; margin-bottom:.3rem; }
+  .edu-school { color:var(--cyan); font-size:.85rem; margin-bottom:.3rem; }
+  .edu-date { color:var(--muted); font-size:.8rem; margin-bottom:.8rem; }
+  .edu-gpa { display:inline-block; background:rgba(0,212,255,.1); color:var(--cyan); padding:.2rem .6rem; border-radius:4px; font-size:.8rem; margin-bottom:.8rem; }
+  .edu-courses { font-size:.78rem; color:var(--muted); line-height:1.7; }
+  .edu-courses strong { color:var(--text); display:block; margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-wrapper { max-width:600px; margin:0 auto; text-align:center; }
+  .contact-wrapper p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-links { display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .contact-item {
+    display:flex; align-items:center; gap:.6rem;
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:.9rem 1.4rem; text-decoration:none; color:var(--text);
+    font-size:.9rem; transition:.3s;
+  }
+  .contact-item:hover { border-color:var(--cyan); color:var(--cyan); transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,.15); }
+  .contact-item span:first-child { font-size:1.2rem; }
+
+  /* FOOTER */
+  footer { background:var(--bg); border-top:1px solid var(--border); text-align:center; padding:1.5rem; color:var(--muted); font-size:.8rem; }
+  footer span { color:var(--cyan); }
+
+  @media(max-width:768px) {
+    .hero-visual { display:none; }
+    .about-grid { grid-template-columns:1fr; gap:2rem; }
+    nav { padding:0 4%; }
+    .nav-links { gap:1.2rem; }
+    .nav-links li:nth-child(n+4) { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">&lt;SY /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🤖 Robotics Engineer</div>
+    <h1>Hi, I'm <span>Shoukang Yu</span></h1>
+    <p class="hero-sub">
+      Master's student at <strong>Northeastern University</strong> specializing in
+      <strong>autonomous robotics</strong>, ROS2, SLAM, and computer vision.
+      Building intelligent systems that bridge hardware and software.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-ring"></div>
+    <div class="robo-icon">🤖</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// who am i</div>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a robotics engineer passionate about building <strong>autonomous systems</strong> that interact intelligently with the real world. Currently pursuing my Master's in Electrical & Computer Engineering at Northeastern University with a perfect 4.0 GPA.</p>
+      <p>My work spans <strong>ROS2 development</strong>, SLAM-based navigation, computer vision for defect detection, and industrial robot programming. I enjoy bridging theory and hands-on implementation.</p>
+      <p>Previously interned at <strong>Dongfeng Motor Corporation</strong> where I programmed ABB six-axis robots, and at <strong>Vtech Holdings</strong> in mold engineering and process optimization.</p>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">4.0</div><div class="stat-label">GPA</div></div>
+        <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Industry Internships</div></div>
+        <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card"><div class="stat-num">2027</div><div class="stat-label">Graduation</div></div>
+      </div>
+    </div>
+    <ul class="info-list">
+      <li><span>📍</span><div><div style="font-size:.75rem;color:var(--muted)">Location</div><strong>Boston, MA</strong></div></li>
+      <li><span>🎓</span><div><div style="font-size:.75rem;color:var(--muted)">University</div><strong>Northeastern University</strong></div></li>
+      <li><span>📚</span><div><div style="font-size:.75rem;color:var(--muted)">Degree</div><strong>M.S. Electrical & Computer Engineering</strong></div></li>
+      <li><span>⚙️</span><div><div style="font-size:.75rem;color:var(--muted)">Focus</div><strong>Autonomous Robotics & ROS2</strong></div></li>
+      <li><span>📧</span><div><div style="font-size:.75rem;color:var(--muted)">Email</div><strong>yu.sho@northeastern.edu</strong></div></li>
+      <li><span>🔗</span><div><div style="font-size:.75rem;color:var(--muted)">GitHub</div><strong>github.com/ShoukangYu</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// tech stack</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3><span class="icon">🤖</span> Robotics & Autonomy</h3>
+      <div class="tag-list">
+        <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">ROS</span>
+        <span class="tag">Kalman Filters</span><span class="tag">Kinematics</span>
+        <span class="tag">Dynamics</span><span class="tag">Sensor Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">👁️</span> Vision & AI</h3>
+      <div class="tag-list">
+        <span class="tag">OpenCV</span><span class="tag">HALCON</span>
+        <span class="tag">Reinforcement Learning</span><span class="tag">Machine Learning</span>
+        <span class="tag">Image Processing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">💻</span> Programming</h3>
+      <div class="tag-list">
+        <span class="tag">Python</span><span class="tag">C/C++</span>
+        <span class="tag">MATLAB</span><span class="tag">Arduino</span>
+        <span class="tag">LabVIEW</span><span class="tag">RAPID</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🔧</span> Hardware & CAD</h3>
+      <div class="tag-list">
+        <span class="tag">SolidWorks</span><span class="tag">CREO</span>
+        <span class="tag">AutoCAD</span><span class="tag">ANSYS</span>
+        <span class="tag">3D Printing</span><span class="tag">CNC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🗄️</span> Databases & Dev</h3>
+      <div class="tag-list">
+        <span class="tag">SQL</span><span class="tag">MySQL</span>
+        <span class="tag">MongoDB</span><span class="tag">Git</span>
+        <span class="tag">Linux</span><span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3><span class="icon">🏭</span> Manufacturing</h3>
+      <div class="tag-list">
+        <span class="tag">Product Development</span><span class="tag">Process Optimization</span>
+        <span class="tag">Quality Control</span><span class="tag">OpenLCA</span>
+        <span class="tag">Injection Molding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// what i've built</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-num">01 / ROBOTICS</div>
+      <h3>ROS2 Autonomous Explorer</h3>
+      <p>Implemented autonomous exploration and mapping for mobile robots using ROS2. Features Wanderer (random obstacle avoidance) and Discoverer (frontier-based exploration) algorithms with SLAM-based navigation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">ROS2</span><span class="proj-tag">SLAM</span>
+        <span class="proj-tag">Python</span><span class="proj-tag">LaserScan</span>
+        <span class="proj-tag">Autonomous Nav</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+        <a href="#" class="proj-link">⟶ Demo</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02 / COMPUTER VISION</div>
+      <h3>Automated Chip Fault Detection</h3>
+      <p>Automated visual inspection system for chip defect detection. Designed a chip positioning system with visual calibration and X/Y axis motion control, plus an image processing pipeline using HALCON for defect detection.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">C++</span><span class="proj-tag">HALCON</span>
+        <span class="proj-tag">Computer Vision</span><span class="proj-tag">Motion Control</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03 / HRI</div>
+      <h3>Voice-Controlled Robot Interface</h3>
+      <p>Real-time voice recognition system for human-robot interaction. Built audio signal acquisition and processing using MyDAQ and LabVIEW with iFlytek Speech SDK for speaker identification and command execution.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">LabVIEW</span><span class="proj-tag">MyDAQ</span>
+        <span class="proj-tag">Speech SDK</span><span class="proj-tag">HRI</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">04 / INDUSTRIAL ROBOTICS</div>
+      <h3>ABB Robot Automation System</h3>
+      <p>Programmed a six-axis ABB robot for block grasping and stacking operations at Dongfeng Motor. Defined motion paths, I/O control, and gripper sequences in RAPID language for automated material handling.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RAPID</span><span class="proj-tag">ABB Robot</span>
+        <span class="proj-tag">Automation</span><span class="proj-tag">Industrial</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">⟶ Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// work history</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">🏭</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mechanical Engineering Intern</h3>
+          <span class="tl-date">Apr 2024 – Jul 2024</span>
+        </div>
+        <div class="tl-company">Dongfeng Motor Corporation · Shiyan, China</div>
+        <ul>
+          <li>Programmed six-axis ABB robot using RAPID language for block grasping and stacking operations</li>
+          <li>Defined motion paths, I/O control, and gripper sequences for automated material handling on production line</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">⚙️</div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <h3>Mold Design & Manufacturing Intern</h3>
+          <span class="tl-date">Jul 2024 – Sep 2024</span>
+        </div>
+        <div class="tl-company">Vtech Holdings Limited · Dongguan, China</div>
+        <ul>
+          <li>Evaluated mold structures and injection molding processes by analyzing 3D assemblies in CREO</li>
+          <li>Identified root causes of production anomalies, reducing defect occurrences</li>
+          <li>Designed 3D mold assemblies including gating, ejection, and cooling systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <div class="section-tag">// academic background</div>
+    <h2 class="section-title">Edu<span>cation</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <h3>M.S. Electrical & Computer Engineering</h3>
+      <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="edu-date">Sep 2025 – Apr 2027</div>
+      <div class="edu-gpa">GPA: 4.00 / 4.00</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Mobile Robotics · Reinforcement Learning · Database Management Systems · Applied Probability & Stochastic Processes
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🏫</div>
+      <h3>B.E. Intelligent Manufacturing Engineering</h3>
+      <div class="edu-school">Shantou University · Shantou, China</div>
+      <div class="edu-date">Sep 2021 – Jun 2025</div>
+      <div class="edu-courses">
+        <strong>Relevant Courses:</strong>
+        Programming Design · Engineering Mechanics · Machine Learning · Intelligent System Design
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// let's connect</div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <p>I'm currently open to robotics engineering roles, research collaborations, and interesting projects. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:yu.sho@northeastern.edu" class="contact-item">
+        <span>📧</span> yu.sho@northeastern.edu
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span>🐙</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Shoukang Yu</span> · 2025</p>
+</footer>
+
+</body>
+</html>
