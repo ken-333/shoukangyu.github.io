@@ -58,6 +58,17 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
 @keyframes spin{to{transform:rotate(360deg);}}
 .hero-profile-placeholder{width:280px;height:280px;border-radius:50%;background:var(--card);border:3px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;font-size:5rem;box-shadow:0 0 40px rgba(0,212,255,.15);}
 
+/* PARTICLES */
+#particles{position:absolute;inset:0;z-index:0;pointer-events:none;}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
 /* SECTIONS */
 .section{padding:90px 5%;}
 .section-dark{background:var(--bg2);}
@@ -178,6 +189,7 @@ footer span{color:var(--cyan);}
 
 <!-- HERO -->
 <section id="hero" class="hero">
+  <canvas id="particles"></canvas>
   <div class="floating-icons">
     <div class="floating-icon" style="top:12%;left:8%;animation-delay:0s"><i class="fas fa-robot"></i></div>
     <div class="floating-icon" style="top:28%;left:85%;animation-delay:1.2s"><i class="fas fa-microchip"></i></div>
@@ -192,7 +204,7 @@ footer span{color:var(--cyan);}
     <div class="floating-icon" style="top:68%;left:58%;animation-delay:4s"><i class="fas fa-drafting-compass"></i></div>
   </div>
   <div class="hero-container">
-    <div class="hero-content">
+    <div class="hero-content reveal-left">
       <div class="hero-tag">🤖 Robotics Engineer</div>
       <h1 class="hero-title">Shoukang <span>Yu</span></h1>
       <p class="hero-subtitle">Robotics & Autonomous Systems</p>
@@ -202,7 +214,7 @@ footer span{color:var(--cyan);}
         <a href="#projects" class="btn btn-secondary">View Projects</a>
       </div>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual reveal-right">
       <div class="hero-profile-visual">
         <img src="./logo/selfie.jpg" alt="Shoukang Yu" class="hero-profile-image">
         <div class="hero-decoration"></div>
