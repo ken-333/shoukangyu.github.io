@@ -299,18 +299,21 @@ footer span{color:var(--cyan);}
         </div>
         <div class="project-body">
           <ul class="project-bullets">
-            <li>Implemented autonomous exploration and mapping for mobile robots using ROS2</li>
-            <li>Developed Wanderer algorithm for random obstacle avoidance using LaserScan data</li>
-            <li>Built Discoverer algorithm with frontier-based exploration for systematic coverage</li>
+            <li>Designed a differential-drive robot model from scratch using <strong>URDF/Xacro</strong>, defining link geometry, joint types, and sensor frames including LiDAR, camera, and IMU</li>
+            <li>Visualized and validated the full TF tree and robot structure in <strong>RViz2</strong> before deployment</li>
+            <li>Implemented Wanderer algorithm for random obstacle avoidance using LaserScan data</li>
+            <li>Built Discoverer algorithm with frontier-based exploration for systematic environment coverage</li>
             <li>Constructed a 2D map of a custom environment using <strong>slam_toolbox</strong>, providing the map required for autonomous navigation</li>
             <li>Deployed <strong>Navigation2</strong> for single-point and waypoint navigation with real-time autonomous obstacle avoidance during path planning</li>
           </ul>
           <div class="project-media">
-            <p class="media-label">SLAM Mapping</p>
+            <p class="media-label">Robot Model in RViz2</p>
+            <img src="./project/robot_model.png" alt="Robot model visualized in RViz2">
+            <p class="media-label" style="margin-top:.8rem;">SLAM Mapping</p>
             <video controls>
               <source src="./vedio/SLAM (1).mp4" type="video/mp4">
             </video>
-            <p class="media-label" style="margin-top:.4rem;">Autonomous Navigation & Obstacle Avoidance</p>
+            <p class="media-label" style="margin-top:.8rem;">Autonomous Navigation & Obstacle Avoidance</p>
             <video controls>
               <source src="./vedio/navigation.mp4" type="video/mp4">
             </video>
@@ -318,7 +321,7 @@ footer span{color:var(--cyan);}
         </div>
         <div class="project-footer">
           <div class="project-tags">
-            <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">Navigation2</span><span class="tag">Python</span><span class="tag">LaserScan</span>
+            <span class="tag">ROS2</span><span class="tag">URDF/Xacro</span><span class="tag">SLAM</span><span class="tag">Navigation2</span><span class="tag">RViz2</span><span class="tag">Python</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
