@@ -339,16 +339,22 @@ footer span{color:var(--cyan);}
           <ul class="project-bullets">
             <li>Built an automated visual inspection system for chip defect detection on production lines</li>
             <li>Designed and modeled the XY-axis motion platform in <strong>UG (NX)</strong>, including motion simulation to validate travel range and mechanical structure</li>
-            <li>Designed chip positioning pipeline with visual calibration and X/Y motion control in C++</li>
-            <li>Developed HALCON-based defect detection algorithm for surface anomaly identification</li>
-            <li>Reduced manual inspection workload through end-to-end automation, verified on the physical system</li>
+            <li>Developed a custom <strong>GUI in C++</strong> to control XY-axis motion and trigger autonomous chip inspection sequences</li>
+            <li>Implemented <strong>HALCON</strong>-based defect detection algorithm to automatically locate and mark defective chips on the inspection surface</li>
+            <li>Integrated visual calibration and motion control pipeline for precise chip positioning and end-to-end automation</li>
           </ul>
           <div class="project-media">
-            <p class="media-label">XY-Axis Motion Platform — CAD Model</p>
+            <p class="media-label">Inspection Target — Semiconductor Wafer</p>
+            <img src="./project/chips.jpg" alt="Semiconductor wafer with individual chips for inspection">
+            <p class="media-label" style="margin-top:.8rem;">XY-Axis Motion Platform — CAD Model</p>
             <img src="./project/visual_inspection_model.jpg" alt="XY-axis motion platform CAD model">
             <p class="media-label" style="margin-top:.8rem;">Motion Simulation</p>
             <video controls>
               <source src="./vedio/MOTION.mp4" type="video/mp4">
+            </video>
+            <p class="media-label" style="margin-top:.8rem;">Chip Fault Detection Software Demo</p>
+            <video controls>
+              <source src="./vedio/chips_decect.mp4" type="video/mp4">
             </video>
             <p class="media-label" style="margin-top:.8rem;">Physical System Demo</p>
             <video controls>
