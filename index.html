@@ -91,23 +91,23 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
 .project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem 2.2rem;transition:.3s;position:relative;overflow:hidden;}
 .project-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--grad);}
 .project-card:hover{border-color:rgba(0,212,255,.3);box-shadow:0 15px 40px rgba(0,0,0,.4);transform:translateY(-3px);}
-.project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:1.2rem;}
-.project-header-left{flex:1;}
+.project-header{margin-bottom:1.2rem;}
 .project-num{font-size:.72rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
-.project-card h3{font-size:1.15rem;margin-bottom:0;}
+.project-card h3{font-size:1.15rem;}
 .project-body{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
 .project-bullets{color:var(--muted);font-size:.88rem;line-height:1.8;padding-left:1.1rem;margin:0;}
 .project-bullets li{margin-bottom:.5rem;}
+.project-bullets strong{color:var(--text);}
 .project-media{display:flex;flex-direction:column;gap:.8rem;}
+.media-label{font-size:.72rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem;}
+.project-media video,.project-media img{width:100%;border-radius:10px;border:1px solid var(--border);display:block;}
 .project-media-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px dashed var(--border);background:rgba(255,255,255,.02);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;gap:.5rem;}
-.project-media img,.project-media video{width:100%;border-radius:10px;border:1px solid var(--border);display:block;}
 .project-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--border);}
 .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
 .tag{padding:.25rem .6rem;background:rgba(124,58,237,.15);color:#a78bfa;border-radius:4px;font-size:.72rem;border:1px solid rgba(124,58,237,.3);}
 .project-links{display:flex;gap:.8rem;flex-shrink:0;}
 .project-link-btn{width:34px;height:34px;border-radius:8px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:.3s;}
 .project-link-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-@media(max-width:768px){.project-body{grid-template-columns:1fr;}.project-header{flex-direction:column;gap:.5rem;}}
 
 .skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;}
 .skills-category-title{font-size:.85rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;font-weight:600;}
@@ -152,6 +152,7 @@ footer span{color:var(--cyan);}
   .hero-affiliations{justify-content:flex-start;}
   .contact-wrapper{grid-template-columns:1fr;}
   .nav-menu li:nth-child(n+5){display:none;}
+  .project-body{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -279,7 +280,6 @@ footer span{color:var(--cyan);}
         </ul>
         <video style="margin-top:1.2rem;width:100%;max-width:560px;border-radius:10px;border:1px solid var(--border);display:block;" controls>
           <source src="./vedio/screen_1771372028497.mp4" type="video/mp4">
-          Your browser does not support the video tag.
         </video>
       </div>
     </div>
@@ -291,28 +291,34 @@ footer span{color:var(--cyan);}
     <h2 class="section-title"><span class="section-number">03</span>Projects</h2>
     <div class="projects-grid">
 
-      <!-- 01 -->
+      <!-- 01 ROS2 -->
       <div class="project-card">
         <div class="project-header">
-          <div class="project-header-left">
-            <div class="project-num">01 / Robotics</div>
-            <h3>ROS2 Autonomous Explorer</h3>
-          </div>
+          <div class="project-num">01 / Robotics</div>
+          <h3>ROS2 Autonomous Explorer</h3>
         </div>
         <div class="project-body">
           <ul class="project-bullets">
             <li>Implemented autonomous exploration and mapping for mobile robots using ROS2</li>
             <li>Developed Wanderer algorithm for random obstacle avoidance using LaserScan data</li>
             <li>Built Discoverer algorithm with frontier-based exploration for systematic coverage</li>
-            <li>Integrated SLAM-based navigation for real-time map building and localization</li>
+            <li>Constructed a 2D map of a custom environment using <strong>slam_toolbox</strong>, providing the map required for autonomous navigation</li>
+            <li>Deployed <strong>Navigation2</strong> for single-point and waypoint navigation with real-time autonomous obstacle avoidance during path planning</li>
           </ul>
           <div class="project-media">
-            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+            <p class="media-label">SLAM Mapping</p>
+            <video controls>
+              <source src="./vedio/SLAM.mp4" type="video/mp4">
+            </video>
+            <p class="media-label" style="margin-top:.4rem;">Autonomous Navigation & Obstacle Avoidance</p>
+            <video controls>
+              <source src="./vedio/navigation.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
         <div class="project-footer">
           <div class="project-tags">
-            <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">Python</span><span class="tag">LaserScan</span>
+            <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">Navigation2</span><span class="tag">Python</span><span class="tag">LaserScan</span>
           </div>
           <div class="project-links">
             <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
@@ -320,13 +326,11 @@ footer span{color:var(--cyan);}
         </div>
       </div>
 
-      <!-- 02 -->
+      <!-- 02 Computer Vision -->
       <div class="project-card">
         <div class="project-header">
-          <div class="project-header-left">
-            <div class="project-num">02 / Computer Vision</div>
-            <h3>Automated Chip Fault Detection</h3>
-          </div>
+          <div class="project-num">02 / Computer Vision</div>
+          <h3>Automated Chip Fault Detection</h3>
         </div>
         <div class="project-body">
           <ul class="project-bullets">
@@ -349,13 +353,11 @@ footer span{color:var(--cyan);}
         </div>
       </div>
 
-      <!-- 03 -->
+      <!-- 03 HRI -->
       <div class="project-card">
         <div class="project-header">
-          <div class="project-header-left">
-            <div class="project-num">03 / HRI</div>
-            <h3>Voice-Controlled Robot Interface</h3>
-          </div>
+          <div class="project-num">03 / HRI</div>
+          <h3>Voice-Controlled Robot Interface</h3>
         </div>
         <div class="project-body">
           <ul class="project-bullets">
@@ -378,13 +380,11 @@ footer span{color:var(--cyan);}
         </div>
       </div>
 
-      <!-- 04 -->
+      <!-- 04 Industrial Robotics -->
       <div class="project-card">
         <div class="project-header">
-          <div class="project-header-left">
-            <div class="project-num">04 / Industrial Robotics</div>
-            <h3>ABB Robot Automation System</h3>
-          </div>
+          <div class="project-num">04 / Industrial Robotics</div>
+          <h3>ABB Robot Automation System</h3>
         </div>
         <div class="project-body">
           <ul class="project-bullets">
@@ -407,13 +407,11 @@ footer span{color:var(--cyan);}
         </div>
       </div>
 
-      <!-- 05 -->
+      <!-- 05 5-DOF Arm -->
       <div class="project-card">
         <div class="project-header">
-          <div class="project-header-left">
-            <div class="project-num">05 / Mechanical Design</div>
-            <h3>5-DOF Desktop Robotic Arm with Parallel Gripper</h3>
-          </div>
+          <div class="project-num">05 / Mechanical Design</div>
+          <h3>5-DOF Desktop Robotic Arm with Parallel Gripper</h3>
         </div>
         <div class="project-body">
           <ul class="project-bullets">
@@ -423,7 +421,10 @@ footer span{color:var(--cyan);}
             <li>Currently exporting to URDF and configuring MoveIt 2 motion planning pipeline for ROS 2 simulation</li>
           </ul>
           <div class="project-media">
-            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+            <p class="media-label">CAD Demo</p>
+            <video controls>
+              <source src="./vedio/screen_1771383315949.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
         <div class="project-footer">
