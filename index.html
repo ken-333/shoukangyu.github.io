@@ -87,19 +87,27 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
 .timeline-description li{margin-bottom:.4rem;}
 
 /* PROJECTS */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
-.project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;transition:.3s;position:relative;overflow:hidden;display:flex;flex-direction:column;}
-.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);}
-.project-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,.3);box-shadow:0 15px 40px rgba(0,0,0,.4);}
-.project-num{font-size:.72rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem;}
-.project-card h3{font-size:1rem;margin-bottom:.8rem;}
-.project-bullets{color:var(--muted);font-size:.85rem;line-height:1.75;margin-bottom:1rem;padding-left:1rem;flex:1;}
-.project-bullets li{margin-bottom:.45rem;}
-.project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;}
+.projects-grid{display:flex;flex-direction:column;gap:2rem;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem 2.2rem;transition:.3s;position:relative;overflow:hidden;}
+.project-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--grad);}
+.project-card:hover{border-color:rgba(0,212,255,.3);box-shadow:0 15px 40px rgba(0,0,0,.4);transform:translateY(-3px);}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;margin-bottom:1.2rem;}
+.project-header-left{flex:1;}
+.project-num{font-size:.72rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.project-card h3{font-size:1.15rem;margin-bottom:0;}
+.project-body{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+.project-bullets{color:var(--muted);font-size:.88rem;line-height:1.8;padding-left:1.1rem;margin:0;}
+.project-bullets li{margin-bottom:.5rem;}
+.project-media{display:flex;flex-direction:column;gap:.8rem;}
+.project-media-placeholder{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px dashed var(--border);background:rgba(255,255,255,.02);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;gap:.5rem;}
+.project-media img,.project-media video{width:100%;border-radius:10px;border:1px solid var(--border);display:block;}
+.project-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--border);}
+.project-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
 .tag{padding:.25rem .6rem;background:rgba(124,58,237,.15);color:#a78bfa;border-radius:4px;font-size:.72rem;border:1px solid rgba(124,58,237,.3);}
-.project-links{display:flex;gap:.8rem;}
+.project-links{display:flex;gap:.8rem;flex-shrink:0;}
 .project-link-btn{width:34px;height:34px;border-radius:8px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:.3s;}
 .project-link-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+@media(max-width:768px){.project-body{grid-template-columns:1fr;}.project-header{flex-direction:column;gap:.5rem;}}
 
 .skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;}
 .skills-category-title{font-size:.85rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;font-weight:600;}
@@ -285,91 +293,146 @@ footer span{color:var(--cyan);}
 
       <!-- 01 -->
       <div class="project-card">
-        <div class="project-num">01 / Robotics</div>
-        <h3>ROS2 Autonomous Explorer</h3>
-        <ul class="project-bullets">
-          <li>Implemented autonomous exploration and mapping for mobile robots using ROS2</li>
-          <li>Developed Wanderer algorithm for random obstacle avoidance using LaserScan data</li>
-          <li>Built Discoverer algorithm with frontier-based exploration for systematic coverage</li>
-          <li>Integrated SLAM-based navigation for real-time map building and localization</li>
-        </ul>
-        <div class="project-tags">
-          <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">Python</span><span class="tag">LaserScan</span>
+        <div class="project-header">
+          <div class="project-header-left">
+            <div class="project-num">01 / Robotics</div>
+            <h3>ROS2 Autonomous Explorer</h3>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <div class="project-body">
+          <ul class="project-bullets">
+            <li>Implemented autonomous exploration and mapping for mobile robots using ROS2</li>
+            <li>Developed Wanderer algorithm for random obstacle avoidance using LaserScan data</li>
+            <li>Built Discoverer algorithm with frontier-based exploration for systematic coverage</li>
+            <li>Integrated SLAM-based navigation for real-time map building and localization</li>
+          </ul>
+          <div class="project-media">
+            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">ROS2</span><span class="tag">SLAM</span><span class="tag">Python</span><span class="tag">LaserScan</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- 02 -->
       <div class="project-card">
-        <div class="project-num">02 / Computer Vision</div>
-        <h3>Automated Chip Fault Detection</h3>
-        <ul class="project-bullets">
-          <li>Built an automated visual inspection system for chip defect detection on production lines</li>
-          <li>Designed chip positioning pipeline with visual calibration and X/Y motion control in C++</li>
-          <li>Developed HALCON-based defect detection algorithm for surface anomaly identification</li>
-          <li>Reduced manual inspection workload through end-to-end automation</li>
-        </ul>
-        <div class="project-tags">
-          <span class="tag">C++</span><span class="tag">HALCON</span><span class="tag">Computer Vision</span><span class="tag">Motion Control</span>
+        <div class="project-header">
+          <div class="project-header-left">
+            <div class="project-num">02 / Computer Vision</div>
+            <h3>Automated Chip Fault Detection</h3>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <div class="project-body">
+          <ul class="project-bullets">
+            <li>Built an automated visual inspection system for chip defect detection on production lines</li>
+            <li>Designed chip positioning pipeline with visual calibration and X/Y motion control in C++</li>
+            <li>Developed HALCON-based defect detection algorithm for surface anomaly identification</li>
+            <li>Reduced manual inspection workload through end-to-end automation</li>
+          </ul>
+          <div class="project-media">
+            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">C++</span><span class="tag">HALCON</span><span class="tag">Computer Vision</span><span class="tag">Motion Control</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- 03 -->
       <div class="project-card">
-        <div class="project-num">03 / HRI</div>
-        <h3>Voice-Controlled Robot Interface</h3>
-        <ul class="project-bullets">
-          <li>Developed a real-time voice recognition system for human-robot interaction</li>
-          <li>Integrated iFlytek Speech SDK for speaker identification and voice command parsing</li>
-          <li>Used MyDAQ and LabVIEW for signal acquisition and processing pipeline</li>
-          <li>Enabled hands-free robot command execution through natural speech input</li>
-        </ul>
-        <div class="project-tags">
-          <span class="tag">LabVIEW</span><span class="tag">MyDAQ</span><span class="tag">Speech SDK</span><span class="tag">HRI</span>
+        <div class="project-header">
+          <div class="project-header-left">
+            <div class="project-num">03 / HRI</div>
+            <h3>Voice-Controlled Robot Interface</h3>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <div class="project-body">
+          <ul class="project-bullets">
+            <li>Developed a real-time voice recognition system for human-robot interaction</li>
+            <li>Integrated iFlytek Speech SDK for speaker identification and voice command parsing</li>
+            <li>Used MyDAQ and LabVIEW for signal acquisition and processing pipeline</li>
+            <li>Enabled hands-free robot command execution through natural speech input</li>
+          </ul>
+          <div class="project-media">
+            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">LabVIEW</span><span class="tag">MyDAQ</span><span class="tag">Speech SDK</span><span class="tag">HRI</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- 04 -->
       <div class="project-card">
-        <div class="project-num">04 / Industrial Robotics</div>
-        <h3>ABB Robot Automation System</h3>
-        <ul class="project-bullets">
-          <li>Programmed a six-axis ABB robot for block grasping and stacking at Dongfeng Motor</li>
-          <li>Defined motion paths, I/O control logic, and gripper sequences using RAPID language</li>
-          <li>Integrated automated material handling into the production line workflow</li>
-          <li>Validated robot trajectories through simulation before live deployment</li>
-        </ul>
-        <div class="project-tags">
-          <span class="tag">RAPID</span><span class="tag">ABB Robot</span><span class="tag">Automation</span><span class="tag">Industrial</span>
+        <div class="project-header">
+          <div class="project-header-left">
+            <div class="project-num">04 / Industrial Robotics</div>
+            <h3>ABB Robot Automation System</h3>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link-btn" title="Details"><i class="fas fa-external-link-alt"></i></a>
+        <div class="project-body">
+          <ul class="project-bullets">
+            <li>Programmed a six-axis ABB robot for block grasping and stacking at Dongfeng Motor</li>
+            <li>Defined motion paths, I/O control logic, and gripper sequences using RAPID language</li>
+            <li>Integrated automated material handling into the production line workflow</li>
+            <li>Validated robot trajectories through simulation before live deployment</li>
+          </ul>
+          <div class="project-media">
+            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">RAPID</span><span class="tag">ABB Robot</span><span class="tag">Automation</span><span class="tag">Industrial</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="Details"><i class="fas fa-external-link-alt"></i></a>
+          </div>
         </div>
       </div>
 
       <!-- 05 -->
       <div class="project-card">
-        <div class="project-num">05 / Mechanical Design</div>
-        <h3>5-DOF Desktop Robotic Arm with Parallel Gripper</h3>
-        <ul class="project-bullets">
-          <li>Designed a 5-DOF serial robotic arm in SolidWorks featuring rotational base, shoulder/elbow pitch joints, and wrist pitch/roll joints</li>
-          <li>Integrated a servo-driven parallel jaw gripper targeting tabletop pick-and-place applications</li>
-          <li>Planned kinematic structure, joint configuration, and full CAD assembly modeling</li>
-          <li>Currently exporting to URDF and configuring MoveIt 2 motion planning pipeline for ROS 2 simulation</li>
-        </ul>
-        <div class="project-tags">
-          <span class="tag">SolidWorks</span><span class="tag">URDF</span><span class="tag">ROS2</span><span class="tag">MoveIt 2</span><span class="tag">Kinematics</span><span class="tag">CAD</span>
+        <div class="project-header">
+          <div class="project-header-left">
+            <div class="project-num">05 / Mechanical Design</div>
+            <h3>5-DOF Desktop Robotic Arm with Parallel Gripper</h3>
+          </div>
         </div>
-        <div class="project-links">
-          <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <div class="project-body">
+          <ul class="project-bullets">
+            <li>Designed a 5-DOF serial robotic arm in SolidWorks featuring rotational base, shoulder/elbow pitch joints, and wrist pitch/roll joints</li>
+            <li>Integrated a servo-driven parallel jaw gripper targeting tabletop pick-and-place applications</li>
+            <li>Planned kinematic structure, joint configuration, and full CAD assembly modeling</li>
+            <li>Currently exporting to URDF and configuring MoveIt 2 motion planning pipeline for ROS 2 simulation</li>
+          </ul>
+          <div class="project-media">
+            <div class="project-media-placeholder"><i class="fas fa-image"></i> Add image / video</div>
+          </div>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">SolidWorks</span><span class="tag">URDF</span><span class="tag">ROS2</span><span class="tag">MoveIt 2</span><span class="tag">Kinematics</span><span class="tag">CAD</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
         </div>
       </div>
 
