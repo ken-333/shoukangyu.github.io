@@ -165,6 +165,7 @@ footer span{color:var(--cyan);}
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#experience" class="nav-link">Experience</a></li>
       <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#publications" class="nav-link">Publications</a></li>
       <li><a href="#skills" class="nav-link">Skills</a></li>
       <li><a href="#education" class="nav-link">Education</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -443,7 +444,53 @@ footer span{color:var(--cyan);}
   </div>
 </section>
 
-<section id="skills" class="section">
+<!-- PUBLICATIONS -->
+<section id="publications" class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="section-number">04</span>Publications</h2>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem 2.2rem;position:relative;overflow:hidden;transition:.3s;" onmouseover="this.style.borderColor='rgba(0,212,255,.3)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <div style="position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--grad);"></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+          <div style="flex:1;min-width:260px;">
+            <div style="font-size:.72rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem;">Journal Article · 2024</div>
+            <h3 style="font-size:1rem;font-weight:600;margin-bottom:.8rem;line-height:1.5;">Life Cycle Assessment of Metal Powder Production: A Bayesian Stochastic Kriging Model-Based Autonomous Estimation</h3>
+            <p style="color:var(--muted);font-size:.85rem;margin-bottom:.6rem;">Haibo Xiao, Baoyun Gao, <strong style="color:var(--text);">Shoukang Yu</strong>, Bin Liu, Sheng Cao, Shitong Peng</p>
+            <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem;font-style:italic;">Autonomous Intelligent Systems, Vol. 4, Article 20 — Springer Nature (Open Access)</p>
+            <ul style="color:var(--muted);font-size:.85rem;line-height:1.8;padding-left:1.1rem;margin-bottom:1rem;">
+              <li>Conducted life cycle assessment (LCA) of titanium and nickel alloy powders produced via gas atomization processes (EIGA & VIGA)</li>
+              <li>Proposed a Bayesian stochastic Kriging model to estimate energy consumption during gas atomization under data-scarce conditions</li>
+              <li>Model improved prediction accuracy by 36% (MSE) and 22% (MAE) compared to conventional Kriging</li>
+              <li>Enabled autonomous estimation of lifecycle environmental impacts for a wide range of metal powder materials</li>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+              <span class="tag">Life Cycle Assessment</span>
+              <span class="tag">Bayesian Inference</span>
+              <span class="tag">Additive Manufacturing</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">OpenLCA</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.8rem;flex-shrink:0;align-items:flex-end;">
+            <a href="https://link.springer.com/article/10.1007/s43684-024-00079-5" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--muted);text-decoration:none;font-size:.85rem;transition:.3s;white-space:nowrap;" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+              <i class="fas fa-external-link-alt"></i> View Paper
+            </a>
+            <div style="padding:.4rem .8rem;background:rgba(0,212,255,.1);color:var(--cyan);border-radius:6px;font-size:.75rem;text-align:center;">
+              <i class="fas fa-quote-right" style="margin-right:.3rem;"></i>9 Citations
+            </div>
+            <div style="padding:.4rem .8rem;background:rgba(124,58,237,.1);color:#a78bfa;border-radius:6px;font-size:.75rem;text-align:center;">
+              Open Access
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section section-dark">
   <div class="container">
     <h2 class="section-title"><span class="section-number">04</span>Technical Skills</h2>
     <div class="skills-container">
